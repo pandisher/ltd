@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANDISHER LTD | Premium Global Vehicle Sourcing</title>
+    <title>PANDISHER LIMITED | Premium Global Vehicle Sourcing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -307,6 +307,13 @@
             border-radius: 15px;
             transition: all 0.3s ease;
             border: 1px solid #f0f0f0;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .feature-card.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .feature-card:hover {
@@ -380,11 +387,18 @@
             border-radius: 10px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .country-item.animated {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .country-item:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.05);
         }
 
         .country-flag {
@@ -410,6 +424,13 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             background: white;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .vehicle-card.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .vehicle-card:hover {
@@ -476,6 +497,13 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .video-card.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .video-card:hover {
@@ -483,10 +511,42 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .video-card video {
+        .video-container {
+            position: relative;
             width: 100%;
             height: 250px;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            filter: brightness(0.9);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            color: white;
+            font-size: 3rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .video-info {
@@ -519,6 +579,13 @@
             padding: 3rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .form-container.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .form-group {
@@ -575,6 +642,13 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .finance-card.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .finance-card:hover {
@@ -730,6 +804,17 @@
             }
         }
 
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -745,7 +830,53 @@
             }
         }
 
-        /* Responsive */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Glow Animation */
+        .glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -768,6 +899,52 @@
             .language-switcher {
                 top: 80px;
                 right: 10px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .feature-card,
+            .vehicle-card,
+            .video-card,
+            .finance-card {
+                margin: 0 1rem;
+            }
+
+            .form-container {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .countries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .hero-slider {
+                height: 70vh;
+            }
+
+            .slide-content {
+                left: 5%;
+                right: 5%;
+            }
+
+            .videos-grid,
+            .showcase-grid,
+            .features-grid,
+            .financing-options {
+                grid-template-columns: 1fr;
+            }
+
+            .countries-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -801,7 +978,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <img src="logo.png" alt="PANDISHER LTD" class="logo">
+            <img src="logo.png" alt="PANDISHER LIMITED" class="logo">
             <ul class="nav-links">
                 <li><a href="#home" class="lang" data-key="home">Home</a></li>
                 <li><a href="#sourcing" class="lang" data-key="sourcing">Global Sourcing</a></li>
@@ -820,10 +997,10 @@
                 <img src="slide.jpg" alt="Premium Vehicles">
                 <div class="slide-overlay"></div>
                 <div class="slide-content">
-                    <span class="slide-tag lang" data-key="premiumTag">Premium Collection</span>
+                    <span class="slide-tag lang floating" data-key="premiumTag">Premium Collection</span>
                     <h1 class="slide-title lang" data-key="heroTitle">Global Vehicle Sourcing Excellence</h1>
                     <p class="slide-description lang" data-key="heroDesc">Discover the finest vehicles sourced worldwide, tailored to your preferences with unmatched quality and service.</p>
-                    <a href="#vehicles" class="whatsapp-cta">
+                    <a href="#vehicles" class="whatsapp-cta glow">
                         <i class="fab fa-whatsapp"></i> <span class="lang" data-key="exploreBtn">Explore Collection</span>
                     </a>
                 </div>
@@ -832,10 +1009,10 @@
                 <img src="slide2.jpg" alt="Luxury Cars">
                 <div class="slide-overlay"></div>
                 <div class="slide-content">
-                    <span class="slide-tag lang" data-key="luxuryTag">Luxury Segment</span>
+                    <span class="slide-tag lang floating" data-key="luxuryTag">Luxury Segment</span>
                     <h1 class="slide-title lang" data-key="luxuryTitle">Elite Automotive Solutions</h1>
                     <p class="slide-description lang" data-key="luxuryDesc">Experience premium luxury vehicles with cutting-edge technology and exceptional performance.</p>
-                    <a href="#contact" class="whatsapp-cta">
+                    <a href="#contact" class="whatsapp-cta glow">
                         <i class="fab fa-whatsapp"></i> <span class="lang" data-key="consultBtn">Request Consultation</span>
                     </a>
                 </div>
@@ -844,10 +1021,10 @@
                 <img src="slide3.jpg" alt="Global Network">
                 <div class="slide-overlay"></div>
                 <div class="slide-content">
-                    <span class="slide-tag lang" data-key="networkTag">Worldwide Network</span>
+                    <span class="slide-tag lang floating" data-key="networkTag">Worldwide Network</span>
                     <h1 class="slide-title lang" data-key="networkTitle">International Procurement Experts</h1>
                     <p class="slide-description lang" data-key="networkDesc">Leverage our global network to source your dream vehicle from any market worldwide.</p>
-                    <a href="#sourcing" class="whatsapp-cta">
+                    <a href="#sourcing" class="whatsapp-cta glow">
                         <i class="fab fa-whatsapp"></i> <span class="lang" data-key="learnBtn">Learn More</span>
                     </a>
                 </div>
@@ -868,21 +1045,21 @@
         </div>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">
+                <div class="feature-icon floating">
                     <i class="fas fa-globe-americas"></i>
                 </div>
                 <h3 class="feature-title lang" data-key="feature1Title">Global Sourcing</h3>
                 <p class="feature-description lang" data-key="feature1Desc">Access vehicles from international markets including Japan, Europe, USA, and UAE with our worldwide network.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">
+                <div class="feature-icon floating">
                     <i class="fas fa-medal"></i>
                 </div>
                 <h3 class="feature-title lang" data-key="feature2Title">Quality Assurance</h3>
                 <p class="feature-description lang" data-key="feature2Desc">Every vehicle undergoes rigorous inspection and quality checks to ensure premium condition and performance.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">
+                <div class="feature-icon floating">
                     <i class="fas fa-handshake"></i>
                 </div>
                 <h3 class="feature-title lang" data-key="feature3Title">Personalized Service</h3>
@@ -926,7 +1103,7 @@
                 </div>
             </div>
             <div class="sourcing-visual">
-                <img src="hero.jpg" alt="Global Network" style="width: 100%; border-radius: 15px;">
+                <img src="hero.jpg" alt="Global Network" style="width: 100%; border-radius: 15px;" class="floating">
             </div>
         </div>
     </section>
@@ -950,10 +1127,15 @@
         </div>
         <div class="videos-grid">
             <div class="video-card">
-                <video controls poster="1.jpg">
-                    <source src="1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                </div>
                 <div class="video-info">
                     <h3 class="video-title lang" data-key="video1Title">Premium SUV Showcase</h3>
                     <p class="video-description lang" data-key="video1Desc">Experience the luxury and performance of our premium SUV collection.</p>
@@ -963,10 +1145,15 @@
                 </div>
             </div>
             <div class="video-card">
-                <video controls poster="2.jpg">
-                    <source src="2.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                </div>
                 <div class="video-info">
                     <h3 class="video-title lang" data-key="video2Title">Luxury Sedan Tour</h3>
                     <p class="video-description lang" data-key="video2Desc">Discover the elegance and comfort of our executive sedan lineup.</p>
@@ -976,10 +1163,15 @@
                 </div>
             </div>
             <div class="video-card">
-                <video controls poster="3.jpg">
-                    <source src="3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                </div>
                 <div class="video-info">
                     <h3 class="video-title lang" data-key="video3Title">Performance Models</h3>
                     <p class="video-description lang" data-key="video3Desc">Witness the power and agility of our high-performance vehicle range.</p>
@@ -1040,22 +1232,22 @@
         </div>
         <div class="financing-options">
             <div class="finance-card">
-                <div class="finance-icon">
+                <div class="finance-icon floating">
                     <i class="fas fa-hand-holding-usd"></i>
                 </div>
                 <h3 class="finance-title lang" data-key="finance1Title">Flexible Payment Plans</h3>
                 <p class="finance-description lang" data-key="finance1Desc">Customized payment structures tailored to your financial preferences with various term options.</p>
             </div>
             <div class="finance-card recommended">
-                <div class="recommended-badge lang" data-key="recommended">Most Popular</div>
-                <div class="finance-icon">
+                <div class="recommended-badge lang glow" data-key="recommended">Most Popular</div>
+                <div class="finance-icon floating">
                     <i class="fas fa-file-contract"></i>
                 </div>
                 <h3 class="finance-title lang" data-key="finance2Title">Lease Options</h3>
                 <p class="finance-description lang" data-key="finance2Desc">Premium leasing solutions with flexible terms and upgrade options for executive clients.</p>
             </div>
             <div class="finance-card">
-                <div class="finance-icon">
+                <div class="finance-icon floating">
                     <i class="fas fa-university"></i>
                 </div>
                 <h3 class="finance-title lang" data-key="finance3Title">Financing Partnerships</h3>
@@ -1069,7 +1261,7 @@
         <div class="cta-content">
             <h2 class="cta-title lang" data-key="ctaTitle">Begin Your Premium Vehicle Journey</h2>
             <p class="cta-description lang" data-key="ctaDesc">Connect with our international vehicle specialists to discuss your requirements and discover tailored solutions for your automotive needs.</p>
-            <a href="https://wa.me/255679330030" class="whatsapp-cta">
+            <a href="https://wa.me/255679330030" class="whatsapp-cta glow">
                 <i class="fab fa-whatsapp"></i> <span class="lang" data-key="ctaButton">Start Conversation on WhatsApp</span>
             </a>
         </div>
@@ -1079,7 +1271,7 @@
     <footer class="premium-footer">
         <div class="footer-content">
             <div class="footer-column">
-                <h3>PANDISHER LTD</h3>
+                <h3>PANDISHER LIMITED</h3>
                 <p class="lang" data-key="footerDesc">Premium global vehicle sourcing and procurement services with unmatched excellence and customer satisfaction.</p>
             </div>
             <div class="footer-column">
@@ -1101,7 +1293,7 @@
             </div>
         </div>
         <div class="developer-credit">
-            <p class="lang" data-key="developerCredit">Website crafted with excellence by <strong>MATO MEDIA TZ</strong></p>
+            <p class="lang" data-key="developerCredit">Developed  by MATO MEDIA TZ <strong>MATO MEDIA TZ</strong></p>
         </div>
     </footer>
 
@@ -1398,8 +1590,35 @@
             });
         });
 
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .vehicle-card, .video-card, .finance-card, .form-container, .country-item');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+                
+                if (isVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Initialize animations on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Initialize videos to autoplay
+        document.querySelectorAll('video').forEach(video => {
+            video.muted = true;
+            video.playsInline = true;
+            video.loop = true;
+        });
+
         // Initialize
         switchLanguage('en');
+        animateOnScroll();
     </script>
 </body>
 </html>
